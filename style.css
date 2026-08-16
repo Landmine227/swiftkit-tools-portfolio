@@ -203,3 +203,29 @@ details p { margin-top: 0.6rem; color: var(--text-muted); font-size: 0.92rem; }
 .custom-preview-shape { background: var(--card-alt); border: 2px solid var(--accent); border-radius: 4px; }
 .custom-output { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.25rem; flex-wrap: wrap; }
 .custom-output code { font-family: monospace; font-size: 1rem; background: var(--card-alt); padding: 0.5rem 0.9rem; border-radius: 6px; color: var(--accent); font-weight: 700; }
+/* ---------- Sliders + RPM options (TikTok Rewards Estimator) ---------- */
+.slider-group { margin-bottom: 1.5rem; }
+.slider-label { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
+.slider-label .slider-value { color: var(--accent); font-family: monospace; font-size: 1rem; }
+.slider-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; }
+input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cursor: pointer; }
+
+.rpm-options { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.5rem; }
+.rpm-option {
+  display: flex; align-items: flex-start; gap: 0.65rem; background: var(--card-alt);
+  border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1rem; cursor: pointer;
+}
+.rpm-option.selected { border-color: var(--accent); }
+.rpm-option input[type="radio"] { margin-top: 0.2rem; accent-color: var(--accent); }
+.rpm-option-text strong { display: block; font-size: 0.92rem; color: var(--text); }
+.rpm-option-text span { font-size: 0.82rem; color: var(--text-muted); }
+
+.estimate-output { text-align: center; padding: 1.75rem 1rem; background: var(--card-alt); border-radius: 10px; margin-top: 1rem; }
+.estimate-output .estimate-label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+.estimate-range { font-size: 1.9rem; font-weight: 800; color: var(--accent); }
+.estimate-per { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem; }
+
+.estimate-disclaimer {
+  background: var(--card-alt); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: 6px; padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem;
+}
