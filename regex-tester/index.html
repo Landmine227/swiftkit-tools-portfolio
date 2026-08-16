@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester & Explainer - Test and Understand Patterns Live | SwiftKit Tools</title>
+<meta name="description" content="Test regular expressions against your own text with live match highlighting, plus a plain-English breakdown of what each part of the pattern does. Free, no sign-up.">
+<meta property="og:title" content="Regex Tester & Explainer - SwiftKit Tools">
+<meta property="og:description" content="Test regex patterns live and get a plain-English breakdown of what each part does.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Regex Pattern Tester & Explainer</h1>
+    <p class="lede">Test a regular expression against your own text with live match highlighting, plus a plain-English breakdown of exactly what each part of the pattern is doing.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Test your regex pattern</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="regex-input-row">
+      <span class="regex-slash">/</span>
+      <input type="text" id="patternInput" class="regex-pattern-input" placeholder="^\d{3}-\d{3}-\d{4}$" oninput="runRegexTest()">
+      <span class="regex-slash">/</span>
+    </div>
+
+    <div class="flag-checkboxes">
+      <label class="flag-checkbox"><input type="checkbox" id="flagG" checked onchange="runRegexTest()"><code>g</code> global</label>
+      <label class="flag-checkbox"><input type="checkbox" id="flagI" onchange="runRegexTest()"><code>i</code> case-insensitive</label>
+      <label class="flag-checkbox"><input type="checkbox" id="flagM" onchange="runRegexTest()"><code>m</code> multiline</label>
+      <label class="flag-checkbox"><input type="checkbox" id="flagS" onchange="runRegexTest()"><code>s</code> dot matches newline</label>
+    </div>
+
+    <div class="regex-error" id="regexError"></div>
+
+    <div class="drop-zone">
+      <textarea id="testStringInput" placeholder="Paste or type your test string here..." oninput="runRegexTest()"></textarea>
+    </div>
+
+    <h3 style="margin-top:1.5rem;">Matches</h3>
+    <div class="highlighted-output" id="highlightOutput"></div>
+    <div class="match-count" id="matchCount"></div>
+    <div id="matchList"></div>
+
+    <div id="explainSection" style="display:none;">
+      <h3>Pattern Breakdown</h3>
+      <div class="explain-list" id="explainList"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Enter your pattern.</strong> Type or paste a regular expression into the field between the slashes.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Paste your test text.</strong> Matches highlight instantly as you type, in both fields.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Read the breakdown.</strong> Scroll down to see a plain-English explanation of what every part of your pattern actually does.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Regular expressions are compact by design, which makes them fast to write and painful to read back later — especially someone else's pattern, or your own from six months ago. This tool solves both problems at once: it shows you exactly what matches in real text, and it translates the pattern itself into plain English, piece by piece.</p>
+    <p>It understands character classes, quantifiers (including lazy versions), anchors, capturing and non-capturing groups, named groups, lookaheads, lookbehinds, and backreferences.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What do the flag checkboxes do?</summary>
+      <p><code>g</code> finds all matches instead of stopping at the first one, <code>i</code> ignores uppercase/lowercase, <code>m</code> makes ^ and $ match the start/end of each line instead of just the whole string, and <code>s</code> lets a dot (.) match newline characters too.</p>
+    </details>
+    <details>
+      <summary>Why does the match count stay the same when I uncheck "g"?</summary>
+      <p>The highlighting always shows every match so you can see the full picture — unchecking "g" only affects how the pattern would behave if you used it in actual code, like with <code>.test()</code> or <code>.match()</code>.</p>
+    </details>
+    <details>
+      <summary>What does "lazy" mean in the breakdown?</summary>
+      <p>A lazy quantifier (like <code>*?</code> or <code>+?</code>) matches as few characters as possible instead of as many as possible, which changes the result when there are multiple ways a pattern could match.</p>
+    </details>
+    <details>
+      <summary>Is my pattern or text uploaded anywhere?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you type is sent anywhere or saved after you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/regex-tester/script.js"></script>
+</body>
+</html>
