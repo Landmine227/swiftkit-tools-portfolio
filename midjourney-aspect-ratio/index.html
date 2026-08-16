@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midjourney Aspect Ratio Generator - Free --ar Code Tool | SwiftKit Tools</title>
+<meta name="description" content="Pick a preset or enter a custom size to get the exact Midjourney --ar code, copied to your clipboard instantly. Free, no sign-up.">
+<meta property="og:title" content="Midjourney Aspect Ratio Generator - SwiftKit Tools">
+<meta property="og:description" content="Get the exact --ar code for your Midjourney prompt in one click.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Midjourney Aspect Ratio Generator</h1>
+    <p class="lede">Pick a common ratio below, or enter your own — get the exact --ar code for your prompt, copied to your clipboard in one click.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="presets-heading">
+    <h2 id="presets-heading">Popular Ratios</h2>
+    <div class="ratio-grid">
+
+      <button class="ratio-card" onclick="copyRatio('--ar 1:1', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:1/1;"></div></div>
+        <div class="ratio-name">Square</div>
+        <div class="ratio-use">Instagram Posts</div>
+        <div class="ratio-code">--ar 1:1</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 4:5', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="height:100%; aspect-ratio:4/5;"></div></div>
+        <div class="ratio-name">Portrait</div>
+        <div class="ratio-use">Instagram Feed</div>
+        <div class="ratio-code">--ar 4:5</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 9:16', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="height:100%; aspect-ratio:9/16;"></div></div>
+        <div class="ratio-name">Vertical</div>
+        <div class="ratio-use">TikTok / Reels / Shorts</div>
+        <div class="ratio-code">--ar 9:16</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 16:9', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:16/9;"></div></div>
+        <div class="ratio-name">Widescreen</div>
+        <div class="ratio-use">YouTube / Desktop</div>
+        <div class="ratio-code">--ar 16:9</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 3:2', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:3/2;"></div></div>
+        <div class="ratio-name">Classic Photo</div>
+        <div class="ratio-use">Photography</div>
+        <div class="ratio-code">--ar 3:2</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 4:3', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:4/3;"></div></div>
+        <div class="ratio-name">Standard</div>
+        <div class="ratio-use">Traditional Screens</div>
+        <div class="ratio-code">--ar 4:3</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 21:9', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:21/9;"></div></div>
+        <div class="ratio-name">Ultrawide</div>
+        <div class="ratio-use">Cinematic Scenes</div>
+        <div class="ratio-code">--ar 21:9</div>
+      </button>
+
+      <button class="ratio-card" onclick="copyRatio('--ar 239:100', this)">
+        <span class="copied-badge">Copied!</span>
+        <div class="ratio-shape-frame"><div class="ratio-shape" style="width:100%; aspect-ratio:239/100;"></div></div>
+        <div class="ratio-name">Anamorphic</div>
+        <div class="ratio-use">Movie Scenes (2.39:1)</div>
+        <div class="ratio-code">--ar 239:100</div>
+      </button>
+
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="custom-heading">
+    <h2 id="custom-heading">Custom Ratio</h2>
+    <div class="custom-ratio-layout">
+      <div class="custom-inputs">
+        <div class="custom-input-group">
+          <label for="widthInput">Width</label>
+          <input type="number" id="widthInput" value="16" min="1" step="any" oninput="updateCustomRatio()">
+        </div>
+        <span class="custom-x">:</span>
+        <div class="custom-input-group">
+          <label for="heightInput">Height</label>
+          <input type="number" id="heightInput" value="9" min="1" step="any" oninput="updateCustomRatio()">
+        </div>
+      </div>
+      <div class="custom-preview-frame">
+        <div class="custom-preview-shape" id="customShape" style="width:100%; aspect-ratio:16/9;"></div>
+      </div>
+    </div>
+    <div class="custom-output">
+      <code id="customCode">--ar 16:9</code>
+      <button class="download-btn" id="customCopyBtn" onclick="copyCustom()">Copy</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Pick a ratio.</strong> Click any preset above, or type your own width and height into the custom fields.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Copy the code.</strong> Clicking a preset copies its --ar code automatically — for a custom ratio, hit the Copy button.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Paste it into your prompt.</strong> Add it to the very end of your Midjourney prompt, after your description and any other parameters.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Midjourney's --ar parameter controls the shape of the image it generates — the first number is width, the second is height, and a bigger first number makes a wider image while a bigger second number makes a taller one.</p>
+    <p>One thing that trips people up: --ar can't contain decimals. A cinematic 2.39:1 ratio has to be typed as <code>--ar 239:100</code> instead, or Midjourney rejects it. This tool handles that conversion for you automatically, whether you're picking a preset or entering your own numbers.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What does --ar actually do?</summary>
+      <p>It sets the width-to-height shape of the image. By default Midjourney generates square images (1:1) — adding --ar lets you make it wide, tall, or anything in between.</p>
+    </details>
+    <details>
+      <summary>Can I use any ratio I want?</summary>
+      <p>Most whole-number ratios work fine. Decimals aren't allowed — you'd need to convert something like 1.85:1 into a whole-number equivalent first. Very extreme ratios can also produce less predictable results, so sticking close to common shapes tends to work best.</p>
+    </details>
+    <details>
+      <summary>Does this work with every Midjourney version?</summary>
+      <p>The code itself works with any version, but older versions support a narrower range of ratios than newer ones. If a ratio doesn't render as expected, try a more standard one like 16:9 or 4:3.</p>
+    </details>
+    <details>
+      <summary>Where do I put --ar in my prompt?</summary>
+      <p>At the very end — after your written description and after any other parameters you're using.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div
