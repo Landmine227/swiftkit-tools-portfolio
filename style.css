@@ -254,3 +254,18 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
 }
 .breakdown-label { color: var(--text-muted); }
 .breakdown-value { font-family: monospace; font-weight: 600; }
+/* ---------- Runway output + gauge (SaaS Burn Rate Calculator) ---------- */
+.runway-output { text-align: center; padding: 1.75rem 1rem; background: var(--card-alt); border-radius: 10px; margin-top: 1.25rem; }
+.runway-date { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.35rem; }
+.runway-months { font-size: 0.95rem; color: var(--text-muted); }
+.runway-status-badge {
+  display: inline-block; padding: 0.3rem 0.85rem; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; margin-top: 0.85rem; color: #fff;
+}
+.runway-gauge-wrap { margin-top: 1.5rem; }
+.runway-gauge-track {
+  width: 100%; height: 14px; background: var(--card-alt); border: 1px solid var(--border);
+  border-radius: 999px; overflow: hidden;
+}
+.runway-gauge-fill { height: 100%; border-radius: 999px; transition: width .3s ease, background-color .3s ease; }
+.runway-gauge-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; }
