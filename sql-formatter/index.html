@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Query Beautifier & Indenter - Free Online Formatter | SwiftKit Tools</title>
+<meta name="description" content="Paste an unreadable, single-line SQL query and get it back properly indented with uppercase keywords. Handles joins, subqueries, and CASE statements. Free, no sign-up.">
+<meta property="og:title" content="SQL Query Beautifier & Indenter - SwiftKit Tools">
+<meta property="og:description" content="Format messy SQL into clean, readable, properly indented queries in your browser.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>SQL Query Beautifier & Indenter</h1>
+    <p class="lede">Paste an unreadable, single-line SQL query and get it back properly indented, with uppercase keywords and each clause on its own line.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Format your SQL query</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="drop-zone">
+      <textarea id="sqlInput" placeholder="Paste your SQL query here, e.g.:&#10;select id, name from users where age > 18 order by name;"></textarea>
+    </div>
+
+    <button class="primary" onclick="formatQuery()" style="margin-top:1rem;">Format Query</button>
+
+    <div id="resultsContainer" class="results-container">
+      <div class="results-header"><h3>Formatted Query</h3></div>
+      <div class="drop-zone">
+        <textarea id="sqlOutput" readonly></textarea>
+      </div>
+      <button class="download-btn" id="copyBtn" onclick="copyOutput()" style="margin-top:0.75rem;">Copy Formatted Query</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Paste your query.</strong> Any messy, single-line, or inconsistently formatted SQL works.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Click "Format Query."</strong> Keywords get uppercased and each major clause — SELECT, FROM, WHERE, JOIN, and so on — gets its own line.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Copy the result.</strong> Paste it straight into your editor, ticket, or documentation.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>This formatter handles the cases that trip up simpler find-and-replace style beautifiers: string literals and comments are left completely untouched even if they contain words like "from" or "where," commas inside function calls like <code>COUNT(a, b)</code> stay on one line instead of breaking, and subqueries get their own indentation level automatically.</p>
+    <p>It also understands JOIN variants (INNER, LEFT, RIGHT, FULL, CROSS), GROUP BY / ORDER BY, CASE / WHEN / THEN / ELSE / END blocks, and BETWEEN...AND (so it won't wrongly break that AND onto its own line).</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Does this work with any SQL dialect?</summary>
+      <p>It's built around standard ANSI SQL syntax common to MySQL, PostgreSQL, SQLite, and SQL Server. Highly dialect-specific syntax may not format perfectly, but standard queries work well.</p>
+    </details>
+    <details>
+      <summary>Will it change my table or column names?</summary>
+      <p>No — only recognized SQL keywords get uppercased. Your table names, column names, and aliases are preserved exactly as you typed them.</p>
+    </details>
+    <details>
+      <summary>Does it handle subqueries?</summary>
+      <p>Yes — a subquery inside parentheses gets its own indentation level, nested under the query it belongs to.</p>
+    </details>
+    <details>
+      <summary>Is my query uploaded anywhere?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/sql-formatter/script.js"></script>
+</body>
+</html>
