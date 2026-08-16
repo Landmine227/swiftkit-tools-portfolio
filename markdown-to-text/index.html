@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown to Plain Text Converter - Strip Formatting Free | SwiftKit Tools</title>
+<meta name="description" content="Paste AI-generated markdown text and instantly strip out asterisks, headers, and formatting symbols. Get clean plain text ready for email or documents. Free, no sign-up.">
+<meta property="og:title" content="Markdown to Plain Text Converter - SwiftKit Tools">
+<meta property="og:description" content="Strip markdown formatting from AI chat responses in one click.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Markdown to Plain Text Converter</h1>
+    <p class="lede">Paste text from ChatGPT, Claude, or anywhere else formatted in markdown, and get back clean plain text — no asterisks, no pound signs, no clutter.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Strip markdown formatting from your text</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+    <div class="drop-zone">
+      <textarea id="markdownInput" placeholder="Paste your markdown-formatted text here..."></textarea>
+    </div>
+    <button class="primary" onclick="stripFormatting()">Strip Formatting</button>
+    <div id="resultsContainer" class="results-container">
+      <div class="results-header"><h3>Cleaned Text</h3></div>
+      <div class="drop-zone">
+        <textarea id="outputText" readonly></textarea>
+      </div>
+      <button class="download-btn" id="copyBtn" onclick="copyOutput()" style="margin-top:0.75rem;">Copy Cleaned Text</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Paste your text.</strong> Copy anything formatted with markdown — from ChatGPT, Claude, Notion, GitHub, wherever — and paste it in.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Click "Strip Formatting."</strong> The tool removes asterisks, pound signs, code fences, and other markdown symbols automatically.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Copy your clean text.</strong> Click "Copy Cleaned Text" and paste it straight into an email, doc, or message.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Markdown is the formatting language AI chat tools use behind the scenes — it's what turns plain text into bold words, headers, and bullet points inside the chat window. The problem is that markdown only renders correctly in places built to understand it. Paste it into an email, a text message, or most social platforms, and you're left staring at stray asterisks and pound signs instead of actual formatting.</p>
+    <p>This tool strips those symbols out entirely, so what you paste elsewhere looks like normal writing instead of broken code.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What counts as markdown formatting?</summary>
+      <p>Things like **bold text**, *italics*, # headers, - bullet points, > quote blocks, and `code snippets` — the symbols AI tools use to format their responses.</p>
+    </details>
+    <details>
+      <summary>Does this work with ChatGPT output too?</summary>
+      <p>Yes — it works on any text using standard markdown syntax, not just Claude.</p>
+    </details>
+    <details>
+      <summary>Will it mess up code inside my text?</summary>
+      <p>No. The actual code content is kept — only the backticks and fence markers around it are removed.</p>
+    </details>
+    <details>
+      <summary>Is my text stored anywhere?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/markdown-to-text/script.js"></script>
+</body>
+</html>
