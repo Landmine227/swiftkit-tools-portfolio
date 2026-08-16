@@ -229,3 +229,28 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
   background: var(--card-alt); border: 1px solid var(--border); border-left: 3px solid var(--accent);
   border-radius: 6px; padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem;
 }
+/* ---------- Number fields + breakdown output (Retainer Calculator) ---------- */
+.number-field { margin-bottom: 1.25rem; }
+.number-field label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+.input-with-prefix { position: relative; }
+.input-with-prefix .prefix {
+  position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); font-weight: 600; pointer-events: none;
+}
+.input-with-prefix input {
+  width: 100%; padding: 0.65rem 0.85rem 0.65rem 1.75rem; background: var(--card-alt);
+  border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.95rem;
+}
+.input-with-prefix input:focus { outline: none; border-color: var(--accent); }
+
+.breakdown-list { display: flex; flex-direction: column; margin-top: 1.25rem; }
+.breakdown-row {
+  display: flex; justify-content: space-between; font-size: 0.92rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+}
+.breakdown-row.total {
+  font-weight: 800; font-size: 1.25rem; color: var(--accent);
+  border-bottom: none; border-top: 2px solid var(--border); padding-top: 0.9rem; margin-top: 0.25rem;
+}
+.breakdown-label { color: var(--text-muted); }
+.breakdown-value { font-family: monospace; font-weight: 600; }
