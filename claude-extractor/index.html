@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Artifact Code Extractor | SwiftKit Tools</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .results-container {
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .file-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        pre {
+            background: #020617;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            max-height: 200px;
+            border: 1px solid var(--border);
+        }
+
+        .download-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            width: auto;
+            margin-top: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
+
+        /* Placeholder ad slots to structure code for optimization later */
+        .ad-slot {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Claude Artifact Code Extractor</h1>
+        <p class="subtitle">Paste your raw Claude markdown conversation below to instantly extract and download just the clean code files.</p>
+        
+        <div class="ad-slot">Advertisement Space (Auto-optimizes on launch)</div>
+
+        <textarea id="markdownInput" placeholder="Paste your markdown chat log here (including the ``` code blocks)..."></textarea>
+        <button onclick="extractCode()">Extract Code Blocks</button>
+
+        <div id="resultsContainer" class="results-container">
+            <div class="results-header">
+                <h2>Extracted Assets</h2>
+            </div>
+            <div id="filesList"></div>
+        </div>
+    </div>
+
+    <script>
+        function extractCode() {
+            const input = document.getElementById('markdownInput').value;
+            const filesList = document.getElementById('filesList');
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            filesList.innerHTML = '';
+            
+            // Regex patterns to capture language tags and inner content of markdown code blocks
+            const regex = /```([a-zA-Z0-9+#-]+)?\s*([\s\S]*?)\n```/g;
+            let match;
+            let count = 0;
+
+            while ((match = regex.exec(input)) !== null) {
+                count++;
+                const lang = match[1] || 'txt';
+                const code = match[2].trim();
+                
+                // Smart file naming conventions based on language tags
+                let extension = lang.toLowerCase();
+                if (extension === 'javascript') extension = 'js';
+                if (extension === 'typescript') extension = 'ts';
+                if (extension === 'python') extension = 'py';
+                
+                const fileName = `extracted_asset_${count}.${extension}`;
+
+                const fileCard = document.createElement('div');
+                fileCard.className = 'file-card';
+
+                fileCard.innerHTML = `
+                    <div class="file-info">
+                        <span class="file-name">${fileName}</span>
+                        <span>Format: ${lang.toUpperCase()}</span>
+                    </div>
+                    <pre><code>${escapeHtml(code)}</code></pre>
+                    <button class="download-btn" onclick="downloadBlob('${btoa(unescape(encodeURIComponent(code)))}', '${fileName}')">Download File</button>
+                `;
+                
+                filesList.appendChild(fileCard);
+            }
+
+            if (count > 0) {
+                resultsContainer.style.display = 'block';
+            } else {
+                alert('No valid markdown code blocks found. Make sure your text contains code wrapped inside triple backticks.');
+                resultsContainer.style.display = 'none';
+            }
+        }
+
+        function downloadBlob(base64Data, fileName) {
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], {type: "application/octet-stream"});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
