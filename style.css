@@ -269,3 +269,14 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
 }
 .runway-gauge-fill { height: 100%; border-radius: 999px; transition: width .3s ease, background-color .3s ease; }
 .runway-gauge-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; }
+/* ---------- Segmented toggle + checkbox row (CSV to JSON, etc.) ---------- */
+.segmented-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; width: fit-content; margin-bottom: 1rem; }
+.segmented-toggle button {
+  padding: 0.5rem 1.1rem; background: var(--card-alt); border: none; color: var(--text-muted);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.segmented-toggle button:not(:last-child) { border-right: 1px solid var(--border); }
+.segmented-toggle button.active { background: var(--accent); color: var(--on-accent); }
+
+.checkbox-row { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 1.25rem; font-size: 0.9rem; }
+.checkbox-row input[type="checkbox"] { accent-color: var(--accent); width: 17px; height: 17px; cursor: pointer; }
