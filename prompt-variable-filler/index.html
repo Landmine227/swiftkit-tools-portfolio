@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Variable Filler - Reusable AI Prompt Templates Free | SwiftKit Tools</title>
+<meta name="description" content="Paste a prompt template with {{variables}} in it and fill in the blanks with a simple form. Get your finished prompt instantly, ready to copy. Free, no sign-up.">
+<meta property="og:title" content="Prompt Variable Filler - SwiftKit Tools">
+<meta property="og:description" content="Turn a reusable prompt template into fill-in-the-blank fields, then copy the finished prompt.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Prompt Variable Filler</h1>
+    <p class="lede">Paste a prompt template with {{variables}} in it — get a simple form to fill them in, and copy the finished prompt in one click.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Paste your prompt template</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+    <div class="drop-zone">
+      <textarea id="templateInput" placeholder="Paste your template here, e.g.: Write a {{tone}} email to {{name}} about {{topic}}." oninput="scanTemplate()"></textarea>
+    </div>
+
+    <div id="fieldsContainer" style="display:none;">
+      <h3 style="margin-top:1.25rem;">Fill In Your Variables</h3>
+      <div id="variableFields" class="variable-fields"></div>
+    </div>
+
+    <button class="primary" onclick="buildPrompt()" style="margin-top:1rem;">Build Prompt</button>
+
+    <div id="resultsContainer" class="results-container">
+      <div class="results-header"><h3>Your Finished Prompt</h3></div>
+      <div class="drop-zone">
+        <textarea id="outputText" readonly></textarea>
+      </div>
+      <button class="download-btn" id="copyBtn" onclick="copyOutput()" style="margin-top:0.75rem;">Copy Finished Prompt</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Paste your template.</strong> Write your prompt with placeholders wrapped in double curly braces, like {{topic}} or {{tone}}.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Fill in the blanks.</strong> The tool automatically detects every unique variable and gives you a labeled box for each one.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Copy your finished prompt.</strong> Click "Build Prompt" and every variable gets swapped in automatically — copy and use it.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>If you use the same prompt structure over and over — a weekly email format, a content brief template, a code review checklist — retyping or manually editing it each time wastes minutes you don't need to lose. This tool lets you write the structure once with placeholders, then fill in just the parts that change.</p>
+    <p>It works entirely in your browser: type or paste a template, and every <code>{{placeholder}}</code> becomes its own input field automatically, in the order it first appears.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What format do variables need to be in?</summary>
+      <p>Wrap them in double curly braces, like {{name}} or {{topic}}. Anything inside the braces becomes the field's label.</p>
+    </details>
+    <details>
+      <summary>What if I use the same variable twice?</summary>
+      <p>It only creates one input field for it, and fills in every instance of that variable with the same value when you build the prompt.</p>
+    </details>
+    <details>
+      <summary>Is my template saved anywhere?</summary>
+      <p>No. Everything runs locally in your browser and disappears when you close the tab.</p>
+    </details>
+    <details>
+      <summary>Does this work for any AI tool?</summary>
+      <p>Yes — this just builds plain text. Use the finished prompt with Claude, ChatGPT, Midjourney, or anything else.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/prompt-variable-filler/script.js"></script>
+</body>
+</html>
