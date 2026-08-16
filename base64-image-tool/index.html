@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Image Encoder/Decoder - Free Online Tool | SwiftKit Tools</title>
+<meta name="description" content="Convert an image to a Base64 string for CSS or HTML, or decode a Base64 string back into a downloadable image. Free, runs in your browser, no upload.">
+<meta property="og:title" content="Base64 Image Encoder/Decoder - SwiftKit Tools">
+<meta property="og:description" content="Convert images to Base64 strings or decode Base64 back to images, entirely in your browser.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Base64 Image Encoder/Decoder</h1>
+    <p class="lede">Drop an image to get a clean Base64 string for CSS or HTML — or paste a Base64 string to preview and download it as a real image file.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Encode or decode Base64 images</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="segmented-toggle" id="modeToggle">
+      <button type="button" class="active" onclick="setMode('encode', this)">Encode Image → Base64</button>
+      <button type="button" onclick="setMode('decode', this)">Decode Base64 → Image</button>
+    </div>
+
+    <div id="encodePanel">
+      <div class="file-drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <div class="drop-icon">📁</div>
+        <div class="drop-text">Click to browse, or drag an image here</div>
+        <div class="drop-subtext">PNG, JPG, GIF, WEBP, or SVG</div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" style="display:none;">
+
+      <div id="encodeResults" style="display:none;">
+        <div class="file-preview-row">
+          <img id="encodePreviewImg" src="" alt="Preview">
+          <div class="file-preview-meta">
+            <strong id="encodeFileName">—</strong>
+            <span id="encodeFileType">—</span>
+          </div>
+        </div>
+        <div class="size-stats">
+          <span>Original: <strong id="originalSize">—</strong></span>
+          <span>Encoded: <strong id="encodedSize">—</strong></span>
+        </div>
+
+        <div class="checkbox-row" style="margin-top:1.25rem;">
+          <input type="checkbox" id="cssWrapCheckbox">
+          <label for="cssWrapCheckbox">Wrap as CSS background-image property</label>
+        </div>
+
+        <div class="drop-zone">
+          <textarea id="encodeOutput" readonly></textarea>
+        </div>
+        <button class="download-btn" id="copyEncodeBtn" onclick="copyEncoded()" style="margin-top:0.75rem;">Copy Base64 String</button>
+      </div>
+    </div>
+
+    <div id="decodePanel" style="display:none;">
+      <div class="drop-zone">
+        <textarea id="decodeInput" placeholder="Paste a Base64 string here — either a full data URI (data:image/png;base64,...) or just the raw Base64 text." oninput="handleDecodeInput()"></textarea>
+      </div>
+
+      <select id="mimeSelect" class="mime-select" style="display:none;" onchange="decodeBase64()">
+        <option value="image/png">Treat as PNG</option>
+        <option value="image/jpeg">Treat as JPEG</option>
+        <option value="image/gif">Treat as GIF</option>
+        <option value="image/webp">Treat as WEBP</option>
+        <option value="image/svg+xml">Treat as SVG</option>
+      </select>
+
+      <div class="regex-error" id="decodeError"></div>
+
+      <div id="decodeResults" style="display:none;">
+        <div class="file-preview-row">
+          <img id="decodePreviewImg" src="" alt="Preview">
+          <div class="file-preview-meta">
+            <strong id="decodeFileType">—</strong>
+            <span id="decodedSize">—</span>
+          </div>
+        </div>
+        <button class="download-btn" onclick="downloadDecoded()" style="margin-top:0.75rem;">Download Image</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Pick a direction.</strong> Encode turns an image into a Base64 string; Decode turns a Base64 string back into an image.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Drop your file or paste your string.</strong> Everything processes instantly, right in your browser.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Copy or download the result.</strong> Grab the Base64 string for your CSS/HTML, or download the decoded image as a real file.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Base64 encoding turns binary image data into plain text, which is useful when you want to embed a small image directly inside a CSS file or HTML document instead of linking to a separate file — handy for tiny icons or when you want to avoid an extra network request.</p>
+    <p>Worth knowing: Base64 text is roughly 33% larger than the original file, so this is best for small images (icons, small logos), not full photos — a large encoded image will actually slow your page down more than a normal image reference would.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Why is my encoded string so much longer than the file?</summary>
+      <p>Base64 encoding always inflates size by about 33%. A 30 KB image becomes roughly a 40 KB string — that's expected, not a bug.</p>
+    </details>
+    <details>
+      <summary>What if my pasted string doesn't have a "data:image" prefix?</summary>
+      <p>A dropdown will appear letting you specify what image type it is, so the tool knows how to reconstruct it correctly.</p>
+    </details>
+    <details>
+      <summary>Is there a file size limit?</summary>
+      <p>No hard limit, but very large images (multiple megabytes) can make the browser feel sluggish while processing — this tool works best for icons and small graphics.</p>
+    </details>
+    <details>
+      <summary>Is my image uploaded anywhere?</summary>
+      <p>No. Everything happens locally in your browser using the File API. Nothing is sent to a server.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/base64-image-tool/script.js"></script>
+</body>
+</html>
