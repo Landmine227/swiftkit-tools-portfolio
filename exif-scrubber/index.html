@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Metadata (EXIF) Scrubber - Remove GPS & Camera Data | SwiftKit Tools</title>
+<meta name="description" content="Drop a photo to see and remove hidden GPS location, camera model, and timestamp metadata before sharing it. Free, runs in your browser, nothing uploaded.">
+<meta property="og:title" content="Photo Metadata (EXIF) Scrubber - SwiftKit Tools">
+<meta property="og:description" content="Strip hidden GPS location and camera metadata from your photos before sharing them.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Photo Metadata (EXIF) Scrubber</h1>
+    <p class="lede">Drop a photo to see exactly what's hidden inside it — GPS location, camera model, timestamp — then download a clean copy with all of it removed.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Scrub photo metadata</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="file-drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <div class="drop-icon">🖼️</div>
+      <div class="drop-text">Click to browse, or drag a photo here</div>
+      <div class="drop-subtext">JPEG, PNG, or WEBP</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+
+    <div id="results" style="display:none;">
+      <div class="file-preview-row" style="margin-top:1.25rem;">
+        <img id="previewImg" src="" alt="Preview">
+        <div class="file-preview-meta">
+          <strong id="fileName">—</strong>
+          <span id="fileTypeSize">—</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top:1.5rem;">What Was Found</h3>
+      <div id="metadataStatus"></div>
+      <div class="metadata-list" id="metadataList"></div>
+
+      <div id="scrubStatus"></div>
+      <button class="primary" id="downloadBtn" style="margin-top:1rem; display:none;">Download Clean Copy</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Drop your photo.</strong> Works with JPEG, PNG, or WEBP files straight from your phone or camera.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>See what's hidden.</strong> The tool reads and displays any GPS coordinates, camera info, and timestamps embedded in the file.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Download the clean version.</strong> A stripped copy is generated automatically — same photo, none of the hidden data.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Most phone and camera photos carry invisible metadata called EXIF data — including the exact GPS coordinates of where the photo was taken, the camera or phone model, and the precise date and time. None of that is visible when you look at the image, but it travels with the file wherever you share it.</p>
+    <p>This tool works by redrawing your photo onto a blank canvas and re-exporting it — a process that only carries over the actual pixels, not any of the surrounding metadata. It's the same reliable method professional privacy tools use, and it happens entirely on your device.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Does this upload my photo anywhere?</summary>
+      <p>No. Everything — reading the metadata and generating the clean copy — happens locally in your browser. Your photo never leaves your device.</p>
+    </details>
+    <details>
+      <summary>Will the scrubbed photo look any different?</summary>
+      <p>Visually, no. JPEGs are re-compressed at high quality during the process, so there can be a very slight, generally unnoticeable quality change. PNG files stay fully lossless.</p>
+    </details>
+    <details>
+      <summary>What if no metadata is found?</summary>
+      <p>Some photos — especially screenshots or images already shared through social media — have little or no metadata to begin with. The tool will tell you clearly if that's the case.</p>
+    </details>
+    <details>
+      <summary>Does this work on GIFs?</summary>
+      <p>No — animated files aren't supported, since the scrubbing process only captures a single static frame. Stick to JPEG, PNG, or WEBP.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/exif-scrubber/script.js"></script>
+</body>
+</html>
