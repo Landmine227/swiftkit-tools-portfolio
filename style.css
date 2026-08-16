@@ -169,3 +169,37 @@ details p { margin-top: 0.6rem; color: var(--text-muted); font-size: 0.92rem; }
   font-size: 0.82rem; color: var(--text-muted);
 }
 .footer-links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+/* ---------- Ratio Grid (Aspect Ratio tool) ---------- */
+.ratio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.9rem; }
+.ratio-card {
+  position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1rem; cursor: pointer; text-align: center; transition: border-color .15s ease;
+  font-family: inherit;
+}
+.ratio-card:hover { border-color: var(--accent); }
+.ratio-shape-frame { width: 64px; height: 64px; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; }
+.ratio-shape { background: var(--card-alt); border: 2px solid var(--accent); border-radius: 3px; }
+.ratio-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.15rem; color: var(--text); }
+.ratio-use { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.ratio-code { font-family: monospace; font-size: 0.82rem; background: var(--card-alt); border-radius: 5px; padding: 0.25rem 0.5rem; display: inline-block; color: var(--accent); font-weight: 600; }
+.copied-badge {
+  position: absolute; top: 0.5rem; right: 0.5rem; background: var(--accent); color: var(--on-accent);
+  font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px;
+  opacity: 0; transform: translateY(-4px); transition: opacity .15s ease, transform .15s ease; pointer-events: none;
+}
+.copied-badge.show { opacity: 1; transform: translateY(0); }
+
+.custom-ratio-layout { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+.custom-inputs { display: flex; align-items: flex-end; gap: 0.75rem; flex: 1; min-width: 220px; }
+.custom-input-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.custom-input-group label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+.custom-input-group input {
+  width: 90px; padding: 0.55rem 0.7rem; background: var(--card-alt); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); font-size: 0.95rem;
+}
+.custom-input-group input:focus { outline: none; border-color: var(--accent); }
+.custom-x { color: var(--text-muted); font-weight: 700; padding-bottom: 0.6rem; }
+.custom-preview-frame { width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.custom-preview-shape { background: var(--card-alt); border: 2px solid var(--accent); border-radius: 4px; }
+.custom-output { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.25rem; flex-wrap: wrap; }
+.custom-output code { font-family: monospace; font-size: 1rem; background: var(--card-alt); padding: 0.5rem 0.9rem; border-radius: 6px; color: var(--accent); font-weight: 700; }
