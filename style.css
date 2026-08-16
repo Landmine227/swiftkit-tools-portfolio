@@ -280,3 +280,42 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
 
 .checkbox-row { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 1.25rem; font-size: 0.9rem; }
 .checkbox-row input[type="checkbox"] { accent-color: var(--accent); width: 17px; height: 17px; cursor: pointer; }
+/* ---------- Regex tester (Regex Pattern Tester & Explainer) ---------- */
+.regex-input-row { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 1rem; }
+.regex-slash { font-family: monospace; font-size: 1.3rem; color: var(--text-muted); font-weight: 700; }
+.regex-pattern-input {
+  flex: 1; padding: 0.65rem 0.85rem; background: var(--card-alt); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); font-family: monospace; font-size: 0.95rem;
+}
+.regex-pattern-input:focus { outline: none; border-color: var(--accent); }
+.regex-pattern-input.invalid { border-color: #ef4444; }
+
+.flag-checkboxes { display: flex; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.flag-checkbox { display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; }
+.flag-checkbox input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+.flag-checkbox code { background: var(--card-alt); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+
+.regex-error {
+  color: #ef4444; font-size: 0.88rem; margin-bottom: 1rem; padding: 0.7rem 1rem;
+  background: rgba(239,68,68,0.1); border: 1px solid #ef4444; border-radius: 6px; display: none;
+}
+
+.highlighted-output {
+  padding: 1rem; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px;
+  font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; word-break: break-word;
+  min-height: 60px; line-height: 1.7;
+}
+.highlighted-output mark { background: var(--accent); color: var(--on-accent); border-radius: 3px; padding: 0 2px; }
+
+.match-count { font-size: 0.9rem; color: var(--text-muted); margin: 1rem 0 0.75rem; }
+.match-item { background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px; padding: 0.7rem 0.9rem; margin-bottom: 0.6rem; font-size: 0.88rem; }
+.match-item .match-main { font-family: monospace; color: var(--accent); font-weight: 600; }
+.match-item .match-groups { color: var(--text-muted); margin-top: 0.3rem; font-family: monospace; font-size: 0.82rem; }
+
+.explain-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.explain-item { display: flex; gap: 0.9rem; align-items: flex-start; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.9rem; }
+.explain-token {
+  font-family: monospace; background: var(--card); border: 1px solid var(--border); padding: 0.15rem 0.5rem;
+  border-radius: 4px; color: var(--accent); font-weight: 700; flex-shrink: 0; min-width: 2.5rem; text-align: center; font-size: 0.85rem;
+}
+.explain-desc { font-size: 0.88rem; color: var(--text-muted); padding-top: 0.1rem; }
