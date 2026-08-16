@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwiftKit Tools - Free Browser-Based Utilities, No Sign-Up</title>
-<meta name="description" content="Free, fast browser tools for developers and creators. No sign-up, no uploads, nothing stored. Everything runs locally in your browser.">
-<meta property="og:title" content="SwiftKit Tools">
-<meta property="og:description" content="Free browser-based utilities. No sign-up, no uploads, nothing stored.">
+<title>Claude Artifact Code Extractor - Extract Code Blocks From AI Chats Free | SwiftKit Tools</title>
+<meta name="description" content="Paste a Claude AI conversation and instantly extract every code block into clean, downloadable files. 100% free, no sign-up, runs entirely in your browser.">
+<meta property="og:title" content="Claude Artifact Code Extractor - SwiftKit Tools">
+<meta property="og:description" content="Paste an AI chat log, get every code block back as a clean downloadable file. Free and private.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,11 +31,11 @@
 
 <div class="ad-banner">Advertisement</div>
 
-<main class="wide">
+<main>
 
   <section class="hero">
-    <h1>Free Browser Tools That Just Work</h1>
-    <p class="lede">Small, fast utilities for developers and creators. No account, no uploads to a server, nothing stored — everything runs right in your browser.</p>
+    <h1>Claude Artifact Code Extractor</h1>
+    <p class="lede">Paste your Claude AI conversation below and instantly extract every code block as a separate, ready-to-download file.</p>
     <div class="trust-strip">
       <span>100% Free</span>
       <span>No Sign-Up</span>
@@ -43,21 +43,61 @@
     </div>
   </section>
 
-  <section aria-labelledby="tools-heading">
-    <h2 id="tools-heading">Available Tools</h2>
-    <div class="tools-grid">
-      <a class="tool-item" href="/claude-extractor/">
-        <h3>Claude Artifact Code Extractor</h3>
-        <p>Paste a Claude AI conversation and instantly extract every code block as a separate, downloadable file.</p>
-        <span class="tool-tag">AI Workflow</span>
-      </a>
-      <div class="coming-soon">More tools launching soon — check back or bookmark this page.</div>
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Extract code from your conversation</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+    <div class="drop-zone">
+      <textarea id="markdownInput" placeholder="Paste your markdown chat log here (including the ``` code blocks)..."></textarea>
+    </div>
+    <button class="primary" onclick="extractCode()">Extract Code Blocks</button>
+    <div id="resultsContainer" class="results-container">
+      <div class="results-header"><h3>Extracted Files</h3></div>
+      <div id="filesList"></div>
     </div>
   </section>
 
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Copy your conversation.</strong> Open the Claude chat that has the code you need, select the text, and copy it — the whole conversation is fine, you don't need to trim it down.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Paste it into the box above.</strong> Drop the whole thing in, backticks and all. Anything that isn't inside a code block gets ignored automatically.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Click "Extract Code Blocks."</strong> Each code block appears as its own labeled file — click download to save it.</div>
+      </li>
+    </ol>
+  </section>
+
   <section class="about-content">
-    <h2>Why SwiftKit Tools</h2>
-    <p>Most online tools make you create an account, upload your file to a stranger's server, or wade through pop-ups before you can get anything done. SwiftKit Tools is the opposite: pick a tool, use it, done. Nothing you paste or upload ever leaves your browser.</p>
+    <h2>About This Tool</h2>
+    <p>AI chat logs mix explanation and code together, and a single answer can contain several separate files. Copying each one by hand means scrolling back and forth, missing a block, or grabbing the wrong version after a few rounds of edits.</p>
+    <p>This tool reads the whole conversation at once, finds every fenced code block, and hands each one back as its own file, named by the language it's written in, so you're not stuck renaming <code>untitled.txt</code> six times.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Does this upload or store my conversation?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
+    </details>
+    <details>
+      <summary>What happens to code blocks without a language tag?</summary>
+      <p>They're saved as a plain .txt file so nothing gets lost, even if the formatting wasn't perfect.</p>
+    </details>
+    <details>
+      <summary>Does this only work with Claude?</summary>
+      <p>No — it works on any text with standard triple-backtick code fences, so logs from ChatGPT, Gemini, or your own notes work the same way.</p>
+    </details>
+    <details>
+      <summary>Is it really free?</summary>
+      <p>Yes. No account, no email, no limits.</p>
+    </details>
   </section>
 
 </main>
@@ -75,5 +115,6 @@
 </footer>
 
 <script src="/theme.js"></script>
+<script src="/claude-extractor/script.js"></script>
 </body>
 </html>
