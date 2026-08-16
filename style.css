@@ -1,0 +1,171 @@
+/* SwiftKit Tools — shared site stylesheet */
+
+:root {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --card-alt: #262626;
+  --text: #f0f0f0;
+  --text-muted: #a8a8a8;
+  --border: #3a3a3a;
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --on-accent: #0b1a10;
+  --header-bg: #1a1a1a;
+}
+
+[data-theme="light"] {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --card-alt: #f7f8f9;
+  --text: #1a1a1a;
+  --text-muted: #5f6b7a;
+  --border: #e0e4e8;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --on-accent: #ffffff;
+  --header-bg: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+/* ---------- Header ---------- */
+.site-header { background: var(--header-bg); border-bottom: 1px solid var(--border); }
+.header-inner {
+  max-width: 960px; margin: 0 auto; padding: 0.9rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.logo { font-weight: 800; font-size: 1.15rem; color: var(--text); }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.nav-links a { color: var(--text-muted); font-weight: 500; font-size: 0.92rem; }
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+#themeToggle {
+  background: var(--card-alt); border: 1px solid var(--border); color: var(--text);
+  padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer;
+  font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.35rem;
+}
+
+/* ---------- Ad banner ---------- */
+.ad-banner {
+  max-width: 960px; margin: 1.25rem auto 0; padding: 0.9rem;
+  border: 1px dashed var(--border); border-radius: 6px; text-align: center;
+  color: var(--text-muted); font-size: 0.78rem; letter-spacing: 0.03em;
+}
+.ad-slot-inline {
+  margin-bottom: 1.1rem; padding: 0.7rem; text-align: center;
+  background: var(--card-alt); border-radius: 6px;
+  color: var(--text-muted); font-size: 0.75rem;
+}
+
+main { max-width: 720px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+main.wide { max-width: 960px; }
+section { margin-top: 2.75rem; }
+
+/* ---------- Hero ---------- */
+.hero { text-align: center; padding: 2.5rem 0 1.5rem; }
+h1 { font-size: clamp(1.7rem, 4.5vw, 2.3rem); font-weight: 800; line-height: 1.25; }
+.lede { margin: 0.85rem auto 0; font-size: 1.05rem; color: var(--text-muted); max-width: 52ch; }
+.trust-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.trust-strip span {
+  background: var(--card-alt); border: 1px solid var(--border);
+  padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* ---------- Tool card ---------- */
+.tool-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.5rem; margin-top: 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.drop-zone { border: 2px dashed var(--border); border-radius: 8px; background: var(--card-alt); transition: border-color .15s ease; }
+.drop-zone:focus-within { border-color: var(--accent); }
+textarea {
+  width: 100%; height: 220px; resize: vertical; border: none; background: transparent;
+  color: var(--text); padding: 1rem; font-family: 'Inter', sans-serif; font-size: 0.92rem;
+}
+textarea::placeholder { color: var(--text-muted); }
+textarea:focus { outline: none; }
+
+button.primary {
+  width: 100%; margin-top: 1rem; padding: 0.9rem 1.5rem;
+  background: var(--accent); color: var(--on-accent); border: none; border-radius: 8px;
+  font-weight: 700; font-size: 1rem; cursor: pointer; transition: background .15s ease;
+}
+button.primary:hover { background: var(--accent-hover); }
+
+.results-container { margin-top: 1.5rem; display: none; }
+.results-header h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.85rem; }
+.file-card { background: var(--card-alt); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.9rem; }
+.file-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.82rem; color: var(--text-muted); }
+.file-name { font-weight: 600; color: var(--accent); }
+pre { background: var(--card); padding: 0.85rem; border-radius: 6px; overflow-x: auto; font-size: 0.8rem; max-height: 200px; border: 1px solid var(--border); }
+.download-btn { margin-top: 0.6rem; width: auto; background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 0.4rem 0.85rem; font-size: 0.8rem; border-radius: 6px; font-weight: 600; }
+.download-btn:hover { background: rgba(34,197,94,0.1); }
+
+/* ---------- Steps / headings ---------- */
+h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+h3 { font-size: 1.02rem; font-weight: 700; margin: 1.25rem 0 0.5rem; }
+.steps { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.steps li { display: flex; gap: 0.9rem; align-items: flex-start; }
+.step-num {
+  font-weight: 700; font-size: 0.85rem; color: var(--on-accent); background: var(--accent);
+  width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.steps strong { display: block; color: var(--text); }
+.steps div { font-size: 0.93rem; color: var(--text-muted); }
+
+/* ---------- Body copy / legal pages ---------- */
+.about-content p, .page-content p { color: var(--text-muted); margin-bottom: 0.9rem; max-width: 68ch; }
+.page-content ul { color: var(--text-muted); margin: 0 0 0.9rem 1.2rem; max-width: 68ch; }
+.page-content li { margin-bottom: 0.4rem; }
+.page-content strong { color: var(--text); }
+.about-content code, .page-content code { background: var(--card-alt); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+.updated-date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+/* ---------- FAQ ---------- */
+details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 0.65rem; }
+summary { cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--accent); font-size: 1.2rem; font-weight: 700; }
+details[open] summary::after { content: "\2212"; }
+details p { margin-top: 0.6rem; color: var(--text-muted); font-size: 0.92rem; }
+
+/* ---------- Tools grid (homepage) ---------- */
+.tools-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.tool-item {
+  display: block; background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.25rem; transition: border-color .15s ease;
+}
+.tool-item:hover { border-color: var(--accent); text-decoration: none; }
+.tool-item h3 { margin: 0 0 0.35rem; color: var(--text); }
+.tool-item p { color: var(--text-muted); font-size: 0.92rem; margin: 0; }
+.tool-item .tool-tag {
+  display: inline-block; margin-top: 0.6rem; font-size: 0.75rem; color: var(--accent);
+  background: rgba(34,197,94,0.1); padding: 0.2rem 0.6rem; border-radius: 999px;
+}
+.coming-soon {
+  border: 1px dashed var(--border); border-radius: 10px; padding: 1.25rem;
+  color: var(--text-muted); font-size: 0.9rem; text-align: center;
+}
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--header-bg); border-top: 1px solid var(--border); margin-top: 3rem; }
+.footer-inner {
+  max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+  font-size: 0.82rem; color: var(--text-muted);
+}
+.footer-links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
