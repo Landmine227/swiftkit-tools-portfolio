@@ -3,350 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Artifact Code Extractor — Pull Code From Any AI Chat | SwiftKit Tools</title>
-<meta name="description" content="Paste a Claude (or any AI) conversation and instantly extract every code block into clean, labeled, downloadable files. Free, runs in your browser, nothing is uploaded.">
-<meta property="og:title" content="Claude Artifact Code Extractor — SwiftKit Tools">
-<meta property="og:description" content="Paste an AI chat log, get every code block back as a clean downloadable file. Free and private — nothing leaves your browser.">
+<title>SwiftKit Tools - Free Browser-Based Utilities, No Sign-Up</title>
+<meta name="description" content="Free, fast browser tools for developers and creators. No sign-up, no uploads, nothing stored. Everything runs locally in your browser.">
+<meta property="og:title" content="SwiftKit Tools">
+<meta property="og:description" content="Free browser-based utilities. No sign-up, no uploads, nothing stored.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Dark is the default theme */
-    --bg: #17140F;
-    --surface: #221D16;
-    --surface-alt: #1B1712;
-    --ink: #EDE6D9;
-    --ink-muted: #A99C89;
-    --border: #362E22;
-    --accent: #C9A227;
-    --accent-strong: #E0BA3D;
-    --on-accent: #17140F;
-    --radius: 8px;
-  }
-
-  [data-theme="light"] {
-    --bg: #EDEAE0;
-    --surface: #F8F6EF;
-    --surface-alt: #E4E0D2;
-    --ink: #221D16;
-    --ink-muted: #6E6250;
-    --border: #D8D3C1;
-    --accent: #9C7A1A;
-    --accent-strong: #7C5F12;
-    --on-accent: #F8F6EF;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Work Sans', -apple-system, sans-serif;
-    line-height: 1.6;
-    position: relative;
-    transition: background-color .2s ease, color .2s ease;
-  }
-
-  /* film-grain texture, keeps the surface from feeling flat/synthetic */
-  body::before {
-    content: "";
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0.05; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  a { color: var(--accent); }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  .frame-line { height: 3px; background: var(--accent); }
-
-  /* ---------- Header ---------- */
-  .site-header {
-    position: relative; z-index: 1;
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 0.5rem;
-  }
-  .wordmark {
-    font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.95rem;
-    text-decoration: none; color: var(--ink); letter-spacing: 0.01em;
-  }
-  .wordmark span { color: var(--accent); }
-  #themeToggle {
-    background: var(--surface); border: 1px solid var(--border); color: var(--ink);
-    padding: 0.45rem 0.85rem; border-radius: 6px; cursor: pointer;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-    display: flex; align-items: center; gap: 0.4rem;
-  }
-  #themeToggle:hover { border-color: var(--accent); }
-
-  /* ---------- Layout ---------- */
-  main { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 0 1.25rem 4rem; }
-  section { margin-top: 3rem; }
-
-  /* ---------- Hero ---------- */
-  .hero { margin-top: 2.5rem; }
-  .tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted);
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    padding: 0.35rem 0;
-  }
-  .tag b { color: var(--accent); font-weight: 600; }
-
-  h1 {
-    font-family: 'Zilla Slab', serif; font-weight: 700;
-    font-size: clamp(2.1rem, 6vw, 3.1rem); line-height: 1.08; letter-spacing: -0.01em;
-    margin-top: 1rem;
-  }
-  .mark { color: var(--accent); font-style: italic; }
-
-  .lede { margin-top: 1.1rem; font-size: 1.08rem; color: var(--ink-muted); max-width: 52ch; }
-
-  /* ---------- Section headings ---------- */
-  h2 { font-family: 'Zilla Slab', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; }
-
-  /* ---------- Instructions ---------- */
-  .steps { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
-  .steps li {
-    display: flex; gap: 0.9rem; align-items: flex-start;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 0.9rem 1.1rem;
-  }
-  .step-num {
-    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.85rem;
-    color: var(--on-accent); background: var(--accent);
-    width: 1.6rem; height: 1.6rem; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .steps strong { display: block; margin-bottom: 0.15rem; color: var(--ink); }
-  .steps div { font-size: 0.95rem; color: var(--ink-muted); }
-
-  /* ---------- Tool card ---------- */
-  .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
-  .ad-slot {
-    margin-bottom: 1.25rem; padding: 0.85rem; text-align: center;
-    border: 1px dashed var(--border); border-radius: 6px;
-    color: var(--ink-muted); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
-  }
-  textarea {
-    width: 100%; height: 230px; resize: vertical;
-    background: var(--surface-alt); border: 1px solid var(--border);
-    border-radius: 6px; color: var(--ink); padding: 1rem;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-  }
-  textarea::placeholder { color: var(--ink-muted); }
-  textarea:focus { outline: none; border-color: var(--accent); }
-
-  button.primary {
-    width: 100%; margin-top: 1rem; padding: 0.85rem 1.5rem;
-    background: var(--accent); color: var(--on-accent); border: none; border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.9rem;
-    cursor: pointer; transition: background .15s ease;
-  }
-  button.primary:hover { background: var(--accent-strong); }
-
-  .results-container { margin-top: 1.5rem; display: none; }
-  .results-header h3 { font-family: 'Zilla Slab', serif; font-size: 1.05rem; margin-bottom: 0.85rem; }
-
-  .file-card { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
-  .file-info {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 0.5rem; font-size: 0.78rem; color: var(--ink-muted);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .file-name { font-weight: 600; color: var(--accent); }
-  pre {
-    background: var(--surface); padding: 0.9rem; border-radius: 6px;
-    overflow-x: auto; font-size: 0.8rem; max-height: 200px; border: 1px solid var(--border);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .download-btn {
-    margin-top: 0.6rem; width: auto; background: transparent;
-    color: var(--accent); border: 1px solid var(--accent);
-    padding: 0.35rem 0.8rem; font-size: 0.76rem; border-radius: 5px;
-  }
-  .download-btn:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
-
-  /* ---------- Content / FAQ ---------- */
-  .about-content p { color: var(--ink-muted); margin-bottom: 0.9rem; max-width: 60ch; }
-  .about-content code { font-family: 'JetBrains Mono', monospace; color: var(--ink); }
-
-  details { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.9rem 1.1rem; margin-bottom: 0.7rem; }
-  summary { cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
-  details[open] summary::after { content: "–"; }
-  details p { margin-top: 0.6rem; color: var(--ink-muted); font-size: 0.92rem; }
-
-  /* ---------- Footer ---------- */
-  .site-footer {
-    position: relative; z-index: 1;
-    max-width: 900px; margin: 3rem auto 0; padding: 1.5rem 1.25rem 2.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.8rem; color: var(--ink-muted); font-family: 'JetBrains Mono', monospace;
-  }
-
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<div class="frame-line"></div>
-
 <header class="site-header">
-  <a class="wordmark" href="/">swiftkit<span>tools</span></a>
-  <button id="themeToggle" onclick="toggleTheme()">
-    <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
-  </button>
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
 </header>
 
-<main>
+<div class="ad-banner">Advertisement</div>
+
+<main class="wide">
 
   <section class="hero">
-    <p class="tag">Swiftkit Archive — <b>Artifact No. 001</b></p>
-    <h1>Code <span class="mark">Extractor</span></h1>
-    <p class="lede">Paste a full Claude conversation. Every code block gets pulled out, cleaned, and cataloged as its own file — nothing else survives the dig.</p>
+    <h1>Free Browser Tools That Just Work</h1>
+    <p class="lede">Small, fast utilities for developers and creators. No account, no uploads to a server, nothing stored — everything runs right in your browser.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
   </section>
 
-  <section aria-labelledby="how-it-works">
-    <h2 id="how-it-works">How it works</h2>
-    <ol class="steps">
-      <li>
-        <span class="step-num">1</span>
-        <div><strong>Copy your conversation.</strong> Open the Claude chat that has the code you need, select the text, and copy it — the whole conversation is fine, you don't need to trim it down.</div>
-      </li>
-      <li>
-        <span class="step-num">2</span>
-        <div><strong>Paste it below.</strong> Drop the whole thing into the box, backticks and all. Anything that isn't inside a code block gets ignored automatically.</div>
-      </li>
-      <li>
-        <span class="step-num">3</span>
-        <div><strong>Download your files.</strong> Each code block shows up as its own labeled file — click download to save it, or grab just the ones you need.</div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="tool-card" aria-labelledby="tool-heading">
-    <h2 id="tool-heading" class="sr-only">Extract code from your conversation</h2>
-    <div class="ad-slot">Advertisement</div>
-    <textarea id="markdownInput" placeholder="Paste your markdown chat log here (including the ``` code blocks)..."></textarea>
-    <button class="primary" onclick="extractCode()">Extract code blocks</button>
-    <div id="resultsContainer" class="results-container">
-      <div class="results-header"><h3>Extracted files</h3></div>
-      <div id="filesList"></div>
+  <section aria-labelledby="tools-heading">
+    <h2 id="tools-heading">Available Tools</h2>
+    <div class="tools-grid">
+      <a class="tool-item" href="/claude-extractor/">
+        <h3>Claude Artifact Code Extractor</h3>
+        <p>Paste a Claude AI conversation and instantly extract every code block as a separate, downloadable file.</p>
+        <span class="tool-tag">AI Workflow</span>
+      </a>
+      <div class="coming-soon">More tools launching soon — check back or bookmark this page.</div>
     </div>
   </section>
 
   <section class="about-content">
-    <h2>Why this exists</h2>
-    <p>AI chat logs mix explanation and code together, and a single answer can contain several separate files. Copying each one by hand means scrolling back and forth, missing a block, or grabbing the wrong version after a few rounds of edits.</p>
-    <p>This tool reads the whole conversation at once, finds every fenced code block, and hands each one back as its own file — named by the language it's written in, so you're not stuck renaming <code>untitled.txt</code> six times.</p>
-  </section>
-
-  <section class="faq" aria-labelledby="faq-heading">
-    <h2 id="faq-heading">Common questions</h2>
-    <details>
-      <summary>Does this upload or store my conversation?</summary>
-      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
-    </details>
-    <details>
-      <summary>What happens to code blocks without a language tag?</summary>
-      <p>They're saved as a plain <code>.txt</code> file so nothing gets lost, even if the formatting wasn't perfect.</p>
-    </details>
-    <details>
-      <summary>Does this only work with Claude?</summary>
-      <p>No — it works on any text with standard triple-backtick code fences, so logs from ChatGPT, Gemini, or your own notes work the same way.</p>
-    </details>
-    <details>
-      <summary>Is it free?</summary>
-      <p>Yes. No account, no email, no limits.</p>
-    </details>
+    <h2>Why SwiftKit Tools</h2>
+    <p>Most online tools make you create an account, upload your file to a stranger's server, or wade through pop-ups before you can get anything done. SwiftKit Tools is the opposite: pick a tool, use it, done. Nothing you paste or upload ever leaves your browser.</p>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  swiftkittools — small, fast browser utilities. No accounts, no uploads.
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
 </footer>
 
-<script>
-  function applyTheme(theme) {
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      document.getElementById('themeIcon').textContent = '🌙';
-      document.getElementById('themeLabel').textContent = 'Dark mode';
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      document.getElementById('themeIcon').textContent = '☀️';
-      document.getElementById('themeLabel').textContent = 'Light mode';
-    }
-  }
-  function toggleTheme() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    const next = isLight ? 'dark' : 'light';
-    localStorage.setItem('swiftkit-theme', next);
-    applyTheme(next);
-  }
-  (function initTheme() {
-    const saved = localStorage.getItem('swiftkit-theme');
-    applyTheme(saved || 'dark');
-  })();
-
-  function extractCode() {
-    const input = document.getElementById('markdownInput').value;
-    const filesList = document.getElementById('filesList');
-    const resultsContainer = document.getElementById('resultsContainer');
-    filesList.innerHTML = '';
-    const regex = /```([a-zA-Z0-9+#-]+)?\s*([\s\S]*?)\n```/g;
-    let match; let count = 0;
-    while ((match = regex.exec(input)) !== null) {
-      count++;
-      const lang = match[1] || 'txt';
-      const code = match[2].trim();
-      let extension = lang.toLowerCase();
-      if (extension === 'javascript') extension = 'js';
-      if (extension === 'typescript') extension = 'ts';
-      if (extension === 'python') extension = 'py';
-      const fileName = `extracted_asset_${count}.${extension}`;
-      const fileCard = document.createElement('div');
-      fileCard.className = 'file-card';
-      fileCard.innerHTML = `
-        <div class="file-info">
-          <span class="file-name">${fileName}</span>
-          <span>Format: ${lang.toUpperCase()}</span>
-        </div>
-        <pre><code>${escapeHtml(code)}</code></pre>
-        <button class="download-btn" onclick="downloadBlob('${btoa(unescape(encodeURIComponent(code)))}', '${fileName}')">Download file</button>
-      `;
-      filesList.appendChild(fileCard);
-    }
-    if (count > 0) {
-      resultsContainer.style.display = 'block';
-    } else {
-      alert('No valid markdown code blocks found. Make sure your text contains code wrapped inside triple backticks.');
-      resultsContainer.style.display = 'none';
-    }
-  }
-  function downloadBlob(base64Data, fileName) {
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], {type: "application/octet-stream"});
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-    URL.revokeObjectURL(link.href);
-  }
-  function escapeHtml(text) {
-    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-  }
-</script>
+<script src="/theme.js"></script>
 </body>
 </html>
