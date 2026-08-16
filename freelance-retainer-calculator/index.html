@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freelance Retainer Pricing Calculator - Hourly Rate to Retainer | SwiftKit Tools</title>
+<meta name="description" content="Turn your hourly rate into a fair monthly retainer price. Factors in scope creep buffer, software overhead, and a self-employment tax set-aside. Free calculator.">
+<meta property="og:title" content="Freelance Retainer Pricing Calculator - SwiftKit Tools">
+<meta property="og:description" content="Convert your hourly rate into a real monthly retainer number, not just hours times rate.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Freelance Retainer Pricing Calculator</h1>
+    <p class="lede">Turn your hourly rate into a monthly retainer number that actually accounts for scope creep, tool overhead, and taxes — not just hours times rate.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Calculate your retainer</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="number-field">
+      <label for="hourlyRate">Your Hourly Rate</label>
+      <div class="input-with-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="hourlyRate" value="75" min="0" step="1" oninput="updateCalculator()">
+      </div>
+    </div>
+
+    <div class="number-field">
+      <label for="hoursPerMonth">Estimated Hours Per Month For This Client</label>
+      <input type="number" id="hoursPerMonth" value="20" min="0" step="1" oninput="updateCalculator()" style="width:100%; padding:0.65rem 0.85rem; background:var(--card-alt); border:1px solid var(--border); border-radius:6px; color:var(--text); font-size:0.95rem;">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>Scope Creep Buffer</span>
+        <span class="slider-value" id="scopeCreepValue">15%</span>
+      </div>
+      <input type="range" id="scopeCreepSlider" min="0" max="50" step="5" value="15" oninput="updateCalculator()">
+      <p class="slider-hint">Padding for the extra unplanned work that almost always shows up over a retainer period.</p>
+    </div>
+
+    <div class="number-field">
+      <label for="overheadInput">Monthly Software / Tool Overhead For This Client</label>
+      <div class="input-with-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="overheadInput" value="50" min="0" step="5" oninput="updateCalculator()">
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>Self-Employment Tax Set-Aside</span>
+        <span class="slider-value" id="taxValue">15%</span>
+      </div>
+      <input type="range" id="taxSlider" min="0" max="40" step="1" value="15" oninput="updateCalculator()">
+      <p class="slider-hint">The standard U.S. self-employment tax rate is 15.3% — adjust this for your own situation.</p>
+    </div>
+
+    <div class="breakdown-list" id="breakdownList">
+      <div class="breakdown-row">
+        <span class="breakdown-label">Base Hourly Value</span>
+        <span class="breakdown-value" id="baseValueOut">$0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label" id="scopeCreepLabelOut">+ Scope Creep Buffer (15%)</span>
+        <span class="breakdown-value" id="scopeCreepOut">$0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">+ Monthly Overhead</span>
+        <span class="breakdown-value" id="overheadOut">$0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">Subtotal</span>
+        <span class="breakdown-value" id="subtotalOut">$0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label" id="taxLabelOut">+ Tax Set-Aside (15%)</span>
+        <span class="breakdown-value" id="taxOut">$0.00</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="breakdown-label">Recommended Monthly Retainer</span>
+        <span class="breakdown-value" id="totalOut">$0.00</span>
+      </div>
+    </div>
+
+    <div class="estimate-disclaimer">
+      This is a simplified planning estimate, not tax or legal advice. Your actual tax liability depends on total income, deductions, entity structure, and state — talk to an accountant for exact numbers.
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Enter your numbers.</strong> Your hourly rate, expected hours per month, and your typical software/tool costs for this client.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Adjust the buffers.</strong> Drag the scope creep and tax set-aside sliders — the math updates live as you move them.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Quote the recommended number.</strong> That's what to actually charge, not just hours multiplied by your rate.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Straight hours-times-rate math almost always underprices a retainer. Clients rarely stay exactly within the originally scoped work, software and tools cost money that a straight hourly number doesn't account for, and self-employment tax isn't withheld automatically the way it is at a W-2 job — so the sticker number needs to cover more than just your time.</p>
+    <p>This tool builds those three factors into the price so what you quote is closer to what you actually need to earn, not just what the raw hours add up to.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Why not just charge hours times rate?</summary>
+      <p>Retainers rarely stay exactly within scope. The buffer protects you from effectively working unpaid overtime when a client's requests creep past the original estimate.</p>
+    </details>
+    <details>
+      <summary>What is a scope creep buffer?</summary>
+      <p>Extra percentage padding built into the price to partially cover the unplanned extra work that tends to show up over the course of a retainer.</p>
+    </details>
+    <details>
+      <summary>Is the tax number exact?</summary>
+      <p>No — it's a simplified planning estimate based on the standard self-employment tax rate. Your real number depends on total income, deductions, and state. Talk to an accountant for exact figures.</p>
+    </details>
+    <details>
+      <summary>Is my data stored anywhere?</summary>
+      <p>No. Everything runs locally in your browser and disappears when you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/freelance-retainer-calculator/script.js"></script>
+</body>
+</html>
