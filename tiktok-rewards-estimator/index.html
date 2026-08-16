@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Creator Rewards Estimator - See Your Potential Earnings | SwiftKit Tools</title>
+<meta name="description" content="Estimate your TikTok Creator Rewards Program earnings based on views, qualified view rate, and content niche. Free calculator, no sign-up.">
+<meta property="og:title" content="TikTok Creator Rewards Estimator - SwiftKit Tools">
+<meta property="og:description" content="See a rough estimate of your TikTok Creator Rewards earnings based on your views and niche.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>TikTok Creator Rewards Estimator</h1>
+    <p class="lede">Get a rough estimate of what a video could earn through TikTok's Creator Rewards Program, based on your views, qualified view rate, and content type.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Estimate your earnings</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>Estimated Views Per Video</span>
+        <span class="slider-value" id="viewsValue">100,000</span>
+      </div>
+      <input type="range" id="viewsSlider" min="1000" max="1000000" step="1000" value="100000" oninput="updateEstimate()">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>Qualified View Rate</span>
+        <span class="slider-value" id="qualifiedValue">70%</span>
+      </div>
+      <input type="range" id="qualifiedSlider" min="30" max="100" step="5" value="70" oninput="updateEstimate()">
+      <p class="slider-hint">Not every public view counts — TikTok only pays for "qualified" views that meet its watch-time bar. 70% is a reasonable starting guess if you're not sure.</p>
+    </div>
+
+    <div class="rpm-options" id="rpmOptions">
+      <label class="rpm-option selected">
+        <input type="radio" name="rpmTier" value="general" checked onchange="updateEstimate()">
+        <div class="rpm-option-text">
+          <strong>General Content</strong>
+          <span>$0.40 – $1.00 per 1,000 qualified views</span>
+        </div>
+      </label>
+      <label class="rpm-option">
+        <input type="radio" name="rpmTier" value="highcpm" onchange="updateEstimate()">
+        <div class="rpm-option-text">
+          <strong>Higher-CPM Niche</strong>
+          <span>Finance, tech, B2B, legal — $1.00 – $1.50 per 1,000 qualified views</span>
+        </div>
+      </label>
+    </div>
+
+    <div class="estimate-output">
+      <div class="estimate-label">Estimated Earnings</div>
+      <div class="estimate-range" id="estimateRange">$28.00 – $70.00</div>
+      <div class="estimate-per">per video, at this view count</div>
+    </div>
+
+    <div class="estimate-disclaimer">
+      This is a rough estimate only, not a guarantee. TikTok doesn't publish its exact payout formula — actual earnings also depend on originality, watch-through, and search value, none of which a simple calculator can measure. Videos under 60 seconds don't qualify for this program at all.
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Set your expected views.</strong> Drag the slider to roughly how many views you expect the video to get.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Set your qualified view rate.</strong> Adjust for how much of your audience typically watches long enough to count — most creators start around 60–80%.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Pick your content type.</strong> General or a higher-paying niche — your estimated range updates instantly.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>TikTok's Creator Rewards Program pays based on "qualified views" — a number that's usually lower than the public view count shown on your video, since it only counts views that meet TikTok's internal watch-time and quality bar.</p>
+    <p>To even be eligible for this program, you need: at least 10,000 followers, at least 100,000 video views in the trailing 30 days, to be 18 or older, on a personal (not business) account, posting in a supported region, with videos at least one minute long. This tool assumes you already meet those requirements — it's estimating per-video earnings, not eligibility.</p>
+    <p>Worth knowing: brand deals and TikTok Shop affiliate income routinely pay far more than the Rewards Program itself for creators with an engaged audience. This calculator only covers the Rewards Program specifically.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What counts as a "qualified view"?</summary>
+      <p>A view that meets TikTok's internal watch-time and quality bar. Not every public view qualifies, which is why the number TikTok pays on is usually lower than what's publicly displayed on your video.</p>
+    </details>
+    <details>
+      <summary>Do I need a certain follower count first?</summary>
+      <p>Yes — Creator Rewards requires at least 10,000 followers and 100,000 views in the past 30 days, plus a personal (not business) account.</p>
+    </details>
+    <details>
+      <summary>Why don't short videos qualify?</summary>
+      <p>The program only pays out on videos at least one minute long. Anything shorter earns $0 from this specific program, even if it goes viral.</p>
+    </details>
+    <details>
+      <summary>Is this estimate exact?</summary>
+      <p>No. TikTok doesn't publish its exact formula. This gives a rough range based on commonly reported RPMs — your real payout also depends on originality, engagement, and search value, which aren't part of this calculation.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/tiktok-rewards-estimator/script.js"></script>
+</body>
+</html>
