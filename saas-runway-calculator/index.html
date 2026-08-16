@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaaS Burn Rate & Runway Calculator - See Your Exact Cash-Out Date | SwiftKit Tools</title>
+<meta name="description" content="Enter your cash reserves, MRR, and monthly expenses to see your exact runway, down to the day. Free calculator for bootstrapped founders.">
+<meta property="og:title" content="SaaS Burn Rate & Runway Calculator - SwiftKit Tools">
+<meta property="og:description" content="See exactly how many months of runway your startup has left, down to the date.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>SaaS Burn Rate & Runway Calculator</h1>
+    <p class="lede">Enter your cash, revenue, and expenses — see exactly how many months of runway you have left, down to the date.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Calculate your runway</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="number-field">
+      <label for="cashInput">Current Cash Reserves</label>
+      <div class="input-with-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="cashInput" value="50000" min="0" step="100" oninput="updateRunway()">
+      </div>
+    </div>
+
+    <div class="number-field">
+      <label for="mrrInput">Monthly Recurring Revenue (MRR)</label>
+      <div class="input-with-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="mrrInput" value="3000" min="0" step="100" oninput="updateRunway()">
+      </div>
+    </div>
+
+    <div class="number-field">
+      <label for="expensesInput">Monthly Operating Expenses</label>
+      <div class="input-with-prefix">
+        <span class="prefix">$</span>
+        <input type="number" id="expensesInput" value="8000" min="0" step="100" oninput="updateRunway()">
+      </div>
+    </div>
+
+    <div class="runway-output">
+      <div class="runway-date" id="runwayDate">—</div>
+      <div class="runway-months" id="runwayMonths">—</div>
+      <span class="runway-status-badge" id="runwayBadge">—</span>
+
+      <div class="runway-gauge-wrap">
+        <div class="runway-gauge-track">
+          <div class="runway-gauge-fill" id="runwayGaugeFill" style="width:0%; background:#ef4444;"></div>
+        </div>
+        <div class="runway-gauge-labels">
+          <span>0 months</span>
+          <span>24+ months</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="estimate-disclaimer">
+      This assumes your burn rate stays constant, which real businesses rarely do. Treat this as a planning snapshot to revisit monthly, not a fixed prediction.
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Enter your cash on hand.</strong> Whatever's currently in the business bank account.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Enter your MRR and expenses.</strong> Your monthly recurring revenue and your total monthly operating costs.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Read your runway.</strong> The tool calculates your net burn and shows the exact date your cash runs out at the current rate.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Burn rate is how much cash your business loses each month — expenses minus revenue. Runway is how many months your current cash lasts at that rate before hitting zero. Most founders think in vague terms like "a few months left," but an exact date makes the number impossible to ignore or round up in your head.</p>
+    <p>If your revenue already covers your expenses, burn is zero or negative — meaning there's technically no runway limit at your current numbers, and the tool reflects that instead of forcing a countdown.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>What counts as "monthly expenses"?</summary>
+      <p>Everything the business spends in a typical month — salaries, software, hosting, contractors, ads, rent. The more complete this number is, the more accurate your runway.</p>
+    </details>
+    <details>
+      <summary>What if my revenue is higher than my expenses?</summary>
+      <p>You're profitable — the tool shows that directly instead of a countdown date, since at those numbers your cash isn't shrinking.</p>
+    </details>
+    <details>
+      <summary>Is the exact date guaranteed?</summary>
+      <p>No — it assumes your burn rate stays exactly the same every month, which real businesses rarely do. Treat it as a snapshot to recheck monthly as your numbers change.</p>
+    </details>
+    <details>
+      <summary>Is my data stored anywhere?</summary>
+      <p>No. Everything runs locally in your browser and disappears when you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/saas-runway-calculator/script.js"></script>
+</body>
+</html>
