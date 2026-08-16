@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV to JSON Converter - Free Online Tool | SwiftKit Tools</title>
+<meta name="description" content="Paste CSV data and instantly convert it to clean, properly typed JSON. Numbers and booleans convert automatically. Free, runs in your browser, no sign-up.">
+<meta property="og:title" content="CSV to JSON Converter - SwiftKit Tools">
+<meta property="og:description" content="Convert CSV to clean, properly typed JSON in your browser. Free, no sign-up.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>CSV to JSON Converter</h1>
+    <p class="lede">Paste CSV data below and get back clean, properly typed JSON — numbers and true/false values converted automatically, not left as plain text.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Convert CSV to JSON</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="drop-zone">
+      <textarea id="csvInput" placeholder="Paste your CSV data here, e.g.:&#10;name,age,active&#10;Alex,29,true&#10;Sam,34,false"></textarea>
+    </div>
+
+    <div class="checkbox-row" style="margin-top:1rem;">
+      <input type="checkbox" id="headerCheckbox" checked>
+      <label for="headerCheckbox">First row is column headers</label>
+    </div>
+
+    <div class="segmented-toggle" id="formatToggle">
+      <button type="button" class="active" onclick="setFormat('pretty', this)">Pretty</button>
+      <button type="button" onclick="setFormat('minified', this)">Minified</button>
+    </div>
+
+    <button class="primary" onclick="csvToJson()">Convert to JSON</button>
+
+    <div id="resultsContainer" class="results-container">
+      <div class="results-header"><h3>JSON Output</h3></div>
+      <div class="drop-zone">
+        <textarea id="jsonOutput" readonly></textarea>
+      </div>
+      <div style="display:flex; gap:0.6rem; margin-top:0.75rem; flex-wrap:wrap;">
+        <button class="download-btn" id="copyBtn" onclick="copyJson()">Copy JSON</button>
+        <button class="download-btn" onclick="downloadJson()">Download .json File</button>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Paste your CSV.</strong> Copy data from Excel, Google Sheets, or any comma-separated file and paste it into the box.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Set your options.</strong> Toggle whether the first row is headers, and pick pretty (readable) or minified (compact) output.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Convert and grab your JSON.</strong> Copy it to your clipboard or download it directly as a .json file.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Most quick CSV-to-JSON converters just wrap every value in quotes, so a column of ages comes out as the strings "29" and "34" instead of actual numbers — which breaks sorting, math, and filtering the moment you try to use the data.</p>
+    <p>This tool automatically detects numbers and true/false values and converts them to their real JSON types, so the output is ready to actually use, not just technically valid.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Does this handle commas inside quoted fields?</summary>
+      <p>Yes — a field like "Smith, John" wrapped in quotes in your CSV is treated as one value, not split into two columns.</p>
+    </details>
+    <details>
+      <summary>What if my CSV doesn't have a header row?</summary>
+      <p>Uncheck "First row is column headers" and the tool will generate generic keys like column_1, column_2, and so on.</p>
+    </details>
+    <details>
+      <summary>Why did my number come out as text?</summary>
+      <p>Values with leading zeros (like zip codes) or mixed formatting are kept as text on purpose, since converting them to a number would change their meaning.</p>
+    </details>
+    <details>
+      <summary>Is my data uploaded anywhere?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/csv-to-json/script.js"></script>
+</body>
+</html>
