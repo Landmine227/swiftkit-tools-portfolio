@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Entropy Meter - Real Strength Check, Not Fake Rules | SwiftKit Tools</title>
+<meta name="description" content="Check your password's real cryptographic strength — not just whether it has a capital letter. Detects common passwords, keyboard patterns, and repetition. 100% offline.">
+<meta property="og:title" content="Password Entropy Meter - SwiftKit Tools">
+<meta property="og:description" content="A real entropy-based password strength check that goes beyond simple character rules.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>Password Entropy Meter</h1>
+    <p class="lede">A real strength check based on actual randomness — not just whether you remembered to add a capital letter and a number.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Never Leaves Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Check your password strength</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="password-input-wrap">
+      <input type="password" id="passwordInput" placeholder="Type a password to check..." oninput="checkPassword()" autocomplete="off">
+      <button type="button" class="password-toggle-btn" id="toggleVisibility" onclick="toggleVisibility()">👁️</button>
+    </div>
+
+    <div id="resultsContainer" class="results-container">
+      <div class="estimate-output">
+        <div class="estimate-label" id="ratingLabel">—</div>
+        <div class="estimate-range" id="bitsDisplay">0 bits</div>
+        <div class="runway-gauge-wrap" style="margin-top:1rem;">
+          <div class="runway-gauge-track">
+            <div class="runway-gauge-fill" id="strengthGauge" style="width:0%;"></div>
+          </div>
+        </div>
+        <div class="estimate-per" id="crackTimeDisplay"></div>
+      </div>
+
+      <div id="warningsSection" style="margin-top:1.25rem;">
+        <div class="metadata-list" id="warningsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Type a password.</strong> Nothing is sent anywhere — the check happens live as you type, entirely on your device.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Read the entropy score.</strong> Higher bits means more genuine randomness — the actual measure of how hard a password is to guess.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Check the flagged issues.</strong> If something specific is weakening your password — a common pattern, repetition, a keyboard sequence — it's called out directly.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Most password strength meters just check boxes: is there a capital letter, a number, a symbol? That approach is easy to game — "Password1!" passes every box and is still one of the first passwords an attacker tries. Real strength comes from entropy: how much genuine randomness and unpredictability the password actually contains.</p>
+    <p>This tool estimates entropy properly — it rewards length (a long, simple passphrase can beat a short, "complex" one), and it specifically checks for and penalizes the patterns that make passwords easy to guess despite looking complicated: known common passwords, keyboard-adjacent sequences like "qwerty," sequential runs like "abc123," and repeated characters.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Is my password sent anywhere or stored?</summary>
+      <p>No. This runs entirely in your browser using JavaScript. Nothing is transmitted, logged, or saved — not even locally. It disappears the moment you close or refresh the tab.</p>
+    </details>
+    <details>
+      <summary>What does the crack time estimate actually mean?</summary>
+      <p>It's a rough estimate assuming an attacker can try 10 billion guesses per second — a realistic rate for a fast offline attack against a leaked password database. Real-world numbers vary a lot depending on how the password was stored and what hardware is used.</p>
+    </details>
+    <details>
+      <summary>Is this as thorough as tools like zxcvbn?</summary>
+      <p>No — this is a lighter-weight heuristic check, not a full dictionary-backed analyzer. It catches common passwords, keyboard patterns, repetition, and sequences, but it won't catch every possible dictionary word or clever letter-substitution trick (like "p@ssw0rd").</p>
+    </details>
+    <details>
+      <summary>Why did a "strong-looking" password score lower than expected?</summary>
+      <p>Character variety alone doesn't guarantee strength. A short password with a capital letter, number, and symbol can still score lower than a long, plain phrase — length and true unpredictability matter more than checkbox complexity.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/password-entropy-meter/script.js"></script>
+</body>
+</html>
