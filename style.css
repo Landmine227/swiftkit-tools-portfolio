@@ -375,3 +375,15 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
 .svg-preview-box svg { max-width: 100%; max-height: 120px; }
 .svg-preview-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; text-align: center; }
 @media (max-width: 480px) { .svg-preview-grid { grid-template-columns: 1fr; } }
+/* ---------- Password input + warnings (Password Entropy Meter) ---------- */
+.password-input-wrap { position: relative; margin-bottom: 1.25rem; }
+.password-input-wrap input {
+  width: 100%; padding: 0.85rem 3rem 0.85rem 1rem; background: var(--card-alt);
+  border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+  font-size: 1.05rem; font-family: monospace;
+}
+.password-input-wrap input:focus { outline: none; border-color: var(--accent); }
+.password-toggle-btn {
+  position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); padding: 0.3rem;
+}
