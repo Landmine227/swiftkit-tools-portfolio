@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG Minifier & Optimizer - Reduce File Size Free | SwiftKit Tools</title>
+<meta name="description" content="Paste an SVG and strip out editor metadata, comments, and excess decimal precision for a smaller, faster-loading file. Free, live preview, no sign-up.">
+<meta property="og:title" content="SVG Minifier & Optimizer - SwiftKit Tools">
+<meta property="og:description" content="Shrink SVG file size by removing editor cruft and excess precision, with a live before/after preview.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">SwiftKit<span>Tools</span></a>
+    <nav class="nav-links">
+      <a href="/">All Tools</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <button id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span><span id="themeLabel">Light mode</span>
+    </button>
+  </div>
+</header>
+
+<div class="ad-banner">Advertisement</div>
+
+<main>
+
+  <section class="hero">
+    <h1>SVG Minifier & Optimizer</h1>
+    <p class="lede">Paste an SVG exported from Illustrator, Figma, or Inkscape and strip out editor metadata, comments, and unnecessary decimal precision — with a live before/after preview.</p>
+    <div class="trust-strip">
+      <span>100% Free</span>
+      <span>No Sign-Up</span>
+      <span>Runs In Your Browser</span>
+    </div>
+  </section>
+
+  <section class="tool-card" aria-labelledby="tool-heading">
+    <h2 id="tool-heading" class="sr-only">Minify your SVG</h2>
+    <div class="ad-slot-inline">Advertisement</div>
+
+    <div class="drop-zone">
+      <textarea id="svgInput" placeholder="Paste your SVG code here..." oninput="runMinify()"></textarea>
+    </div>
+
+    <div class="slider-group" style="margin-top:1.25rem;">
+      <div class="slider-label">
+        <span>Decimal Precision</span>
+        <span class="slider-value" id="precisionValue">2</span>
+      </div>
+      <input type="range" id="precisionSlider" min="0" max="4" step="1" value="2" oninput="runMinify()">
+      <p class="slider-hint">Lower keeps the file smaller but can very slightly shift curve accuracy. 2 is a safe default for icons.</p>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="stripTitleCheckbox" onchange="runMinify()">
+      <label for="stripTitleCheckbox">Also remove &lt;title&gt; and &lt;desc&gt; tags (reduces accessibility, use with care)</label>
+    </div>
+
+    <div id="resultsContainer" class="results-container">
+      <div class="size-stats" id="sizeStats"></div>
+
+      <div class="svg-preview-grid">
+        <div>
+          <div class="svg-preview-label">Before</div>
+          <div class="svg-preview-box" id="previewBefore"></div>
+        </div>
+        <div>
+          <div class="svg-preview-label">After</div>
+          <div class="svg-preview-box" id="previewAfter"></div>
+        </div>
+      </div>
+
+      <div class="results-header"><h3>Minified SVG</h3></div>
+      <div class="drop-zone">
+        <textarea id="svgOutput" readonly></textarea>
+      </div>
+      <div style="display:flex; gap:0.6rem; margin-top:0.75rem; flex-wrap:wrap;">
+        <button class="download-btn" id="copyBtn" onclick="copyOutput()">Copy Minified SVG</button>
+        <button class="download-btn" onclick="downloadSvg()">Download .svg File</button>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How to use this tool</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><strong>Paste your SVG code.</strong> Straight from Illustrator, Figma, Inkscape, or wherever it was exported.</div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><strong>Adjust the precision if needed.</strong> Compare the before/after preview to make sure nothing visibly changed.</div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><strong>Copy or download the result.</strong> Same visual icon, a meaningfully smaller file.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-content">
+    <h2>About This Tool</h2>
+    <p>Design tools routinely export SVGs full of things a browser never needs: editor-specific metadata (Inkscape and Sodipodi attributes are common offenders), XML comments, empty attributes, and coordinate values with far more decimal precision than any screen can actually render. This tool strips all of that out.</p>
+    <p>It's deliberately conservative about IDs — gradients, clip-paths, and masks that reference an ID elsewhere in the file are left completely alone, so referenced elements never silently break. This trims metadata and precision; it does not attempt to restructure or recompress the path data itself.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <details>
+      <summary>Will this break gradients or clip-paths in my SVG?</summary>
+      <p>No — element IDs and every reference to them (like <code>fill="url(#gradient1)"</code>) are left untouched specifically to avoid breaking those connections.</p>
+    </details>
+    <details>
+      <summary>What does the precision slider actually do?</summary>
+      <p>It rounds decimal numbers in path data and coordinates to fewer digits — most icons look identical down to 1-2 decimal places, since screens can't render finer detail than that anyway.</p>
+    </details>
+    <details>
+      <summary>Why keep title and desc tags by default?</summary>
+      <p>Those tags are what screen readers announce for the image, so removing them by default would quietly hurt accessibility. The checkbox is there if you're certain you don't need them.</p>
+    </details>
+    <details>
+      <summary>Is my SVG uploaded anywhere?</summary>
+      <p>No. Everything runs locally in your browser. Nothing you paste is sent anywhere or saved after you close the tab.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 SwiftKitTools. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/theme.js"></script>
+<script src="/svg-minifier/script.js"></script>
+</body>
+</html>
