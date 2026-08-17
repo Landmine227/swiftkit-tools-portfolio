@@ -358,3 +358,20 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 6px; cur
 }
 .status-banner.clean { background: rgba(34,197,94,0.08); border-color: var(--accent); color: var(--text); }
 .status-banner.found { background: rgba(239,68,68,0.08); border-color: #ef4444; color: var(--text); }
+/* ---------- SVG preview boxes (SVG Minifier) ---------- */
+.svg-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.svg-preview-box {
+  border: 1px solid var(--border); border-radius: 8px; padding: 1rem;
+  background-image:
+    linear-gradient(45deg, #00000010 25%, transparent 25%),
+    linear-gradient(-45deg, #00000010 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #00000010 75%),
+    linear-gradient(-45deg, transparent 75%, #00000010 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 140px; overflow: hidden;
+}
+.svg-preview-box svg { max-width: 100%; max-height: 120px; }
+.svg-preview-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; text-align: center; }
+@media (max-width: 480px) { .svg-preview-grid { grid-template-columns: 1fr; } }
